@@ -6,24 +6,23 @@ import seaborn as sns
 # Load - data
 dataset = pd.read_csv('SupplyChain.csv', encoding='unicode_escape')
 
-
-
-
 # Check - Missing value
 dataset.isnull().sum()
 # Customer Zipcode
 # Order Zipcode 
 # Product Description 
 
-# Create - Customer Full Name
-dataset[['Customer Fname', 'Customer Lname']] 
-dataset['Customer Full Name'] = dataset['Customer Fname'] + dataset['Customer Lname']
-dataset['Customer Full Name']
 
 # Fill - Zipcode
 dataset['Customer Zipcode'].value_counts() 
 dataset['Customer Zipcode'].isnull().sum()
 dataset['Customer Zipcode'] = dataset['Customer Zipcode'].fillna(0)
+
+
+# Create - Customer Full Name
+dataset[['Customer Fname', 'Customer Lname']] 
+dataset['Customer Full Name'] = dataset['Customer Fname'] + dataset['Customer Lname']
+dataset['Customer Full Name']
 
 # Check - Correlation
 data = dataset
@@ -174,3 +173,5 @@ def RFM_User(df):
 
 customer_seg['Customer_Segmentation'] = customer_seg.apply(RFM_User, axis=1)
 customer_seg
+
+
