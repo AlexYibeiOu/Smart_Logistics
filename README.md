@@ -15,3 +15,7 @@
     1.5 Forecast for sales, i.e. the Sales field.
     
     1.6 Forecasting of order quantity, i.e. Order Item Quantity.
+
+2. Used Car Sales Price Prediction
+
+    Compitition Link: https://tianchi.aliyun.com/competition/entrance/231784/introduction
