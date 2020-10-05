@@ -25,3 +25,13 @@ sns.distplot(df_train['RevolvingUtilizationOfUnsecuredLines'])
 df_train.info()  
 df_train = df_train.fillna(df_train.median())
 df_train.isnull().sum()
+
+# Binning
+
+import math
+# Bin - age [-math.inf, 25, 40, 50, 60, 70, math.inf]
+age_bins = [-math.inf, 25, 40, 50, 60, 70, math.inf]
+df_train['age'].value_counts()
+df_train['bin_age'] = pd.cut(df_train['age'], bins=age_bins)
+df_train['bin_age'].value_counts()
+
