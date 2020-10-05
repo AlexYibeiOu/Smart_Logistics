@@ -22,7 +22,7 @@
 
 3. Give Me Some Credit
 
-   ![GiveMeSomeCredit.pny](https://github.com/yibeiou/Smart_Logistics/blob/master/GiveMeSomeCredit/GiveMeSomeCredit.png)
+   ![GiveMeSomeCredit](https://tva1.sinaimg.cn/large/007S8ZIlgy1gjen7y9b0xj30q304vmzi.jpg)
 
    Banks play a crucial role in market economies. They decide who can get  finance and on what terms and can make or break investment decisions.  For markets and society to function, individuals and companies need  access to credit. 
 
@@ -31,5 +31,3 @@
    The goal of this competition is to build a model that borrowers can use to help make the best financial decisions.
 
    Historical data are provided on 250,000 borrowers and the prize pool  is $5,000 ($3,000 for first, $1,500 for second and $500 for third).
-
-![GiveMeSomeCredit](https://tva1.sinaimg.cn/large/007S8ZIlgy1gjen7y9b0xj30q304vmzi.jpg)
