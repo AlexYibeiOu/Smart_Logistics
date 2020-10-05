@@ -20,3 +20,8 @@ pd.DataFrame({'Column': null_num.index, 'Value':null_num.values, '%':null_num.va
 
 df_train['RevolvingUtilizationOfUnsecuredLines'].describe()
 sns.distplot(df_train['RevolvingUtilizationOfUnsecuredLines'])
+
+# Fill - missing data
+df_train.info()  
+df_train = df_train.fillna(df_train.median())
+df_train.isnull().sum()
