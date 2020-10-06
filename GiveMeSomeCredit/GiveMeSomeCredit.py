@@ -68,8 +68,8 @@ df_train['bin_DebtRatio'] = pd.qcut(df_train['DebtRatio'], q=5, duplicates='drop
 df_train['bin_MonthlyIncome'] = pd.qcut(df_train['MonthlyIncome'], q=5, duplicates='drop')
 df_train['bin_NumberOfOpenCreditLinesAndLoans'] = pd.qcut(df_train['NumberOfOpenCreditLinesAndLoans'], q=5, duplicates='drop')
 df_train['bin_NumberRealEstateLoansOrLines'] = pd.qcut(df_train['NumberRealEstateLoansOrLines'], q=5, duplicates='drop')
-
 df_train[['bin_RevolvingUtilizationOfUnsecuredLines', \
     'bin_DebtRatio','bin_MonthlyIncome', \
     'bin_NumberOfOpenCreditLinesAndLoans', 'NumberRealEstateLoansOrLines']]
-
+df_train['bin_NumberRealEstateLoansOrLines'].value_counts()
+df_train['NumberRealEstateLoansOrLines'].value_counts()
