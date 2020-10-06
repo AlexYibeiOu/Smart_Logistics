@@ -84,13 +84,29 @@ bin_cols = [c for c in df_train.columns.values if c.startswith('bin')]
 bin_cols
 
 # IV
+import numpy as np
 def cal_IV(df, feature, target):
     lst = []
+    cols = ['Variable', 'Value', 'All', 'Bad']
     for i in range(df[feature].nunique()):   # nunique = number of unique
         val = list(df[feature].unique())[i] 
         temp1 = df[df[feature]==val].count()[feature]  # total
         temp2 = df[(df[feature]==val) & (df[target]==1)].count()[feature] # number of target=1
         print(feature, val, temp1, temp2)
-        lst.append([feature])
+        lst.append([feature, val, temp1, temp2])
+    data = pd.DataFrame(lst, columns=cols)
+    data = data[data['Bad'] > 0]
+    data['Share'] = data['All'] / data['All'].sum()
+    data['Bad Rate'] = data['Bad'] / data['All']  # this value leads to bad
+    data['Distribution Bad'] = data['Bad'] / data['Bad'].sum() 
+    data['Distribution Good'] = \
+        (data['All'] - data['Bad']) / (data['All'].sum() - data['Bad'].sum()) 
+    data['WOE'] = np.log(data['Distribution Bad'] / data['Distribution Good'])
+    data['IV'] = \
+        ((data['Distribution Bad'] - data['Distribution Good']) * data['WOE']).sum()
+
+    data = data.sort_values(by=['Variable', 'Value'],ascending=True)
+    print(data)
 
 cal_IV(df_train, 'bin_age', 'SeriousDlqin2yrs')
+
