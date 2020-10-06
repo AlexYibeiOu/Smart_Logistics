@@ -26,6 +26,8 @@ sns.distplot(df_train['RevolvingUtilizationOfUnsecuredLines'])
 df_train.info()  
 df_train = df_train.fillna(df_train.median())
 df_train.isnull().sum()
+#df_train.median()
+#df_train['MonthlyIncome'].isnull().sum()
 
 # Binning
 
@@ -39,9 +41,8 @@ df_train[['age', 'bin_age']]
 df_train['bin_age'].value_counts()
 
 # Bin - NumberOfDependents [-math.inf,2,4,6,8,10,math.inf]
-dependent_bin =[-math.inf,2,4,6,8,10,math.inf]
-df_train['bin_NumberOfDependents'] = \
-    pd.cut(df_train['NumberOfDependents'], bins=dependent_bin)
+dependent_bins =[-math.inf,2,4,6,8,10,math.inf]
+df_train['bin_NumberOfDependents'] = pd.cut(df_train['NumberOfDependents'], bins=dependent_bins)
 df_train[['NumberOfDependents', 'bin_NumberOfDependents']]
 df_train['bin_NumberOfDependents'].value_counts()
 
@@ -84,6 +85,9 @@ bin_cols = [c for c in df_train.columns.values if c.startswith('bin')]
 bin_cols
 
 
+df_train['bin_NumberOfDependents'].value_counts()
+df_train['bin_MonthlyIncome'].value_counts()
+
 import numpy as np
 
 # IV
@@ -105,7 +109,7 @@ def cal_IV(df, feature, target):
         (data['All'] - data['Bad']) / (data['All'].sum() - data['Bad'].sum()) 
     data['WOE'] = np.log(data['Distribution Bad'] / data['Distribution Good'])
     data['IV'] = \
-        ((data['Distribution Bad'] - data['Distribution Good']) * data['WOE']).sum()
+        (data['Distribution Bad'] - data['Distribution Good']) * data['WOE']
 
     data = data.sort_values(by=['Variable', 'Value'],ascending=True)
     #print(data)
@@ -115,3 +119,9 @@ for col in bin_cols:
     print(col)
     print(cal_IV(df_train, col, 'SeriousDlqin2yrs'))
 
+
+for col in bin_cols:
+    #print(col)
+    #print(cal_IV(df_train, col, 'SeriousDlqin2yrs'))
+    temp_IV = cal_IV(df_train, col, 'SeriousDlqin2yrs')
+    print (col, temp_IV)
