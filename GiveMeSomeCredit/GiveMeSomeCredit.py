@@ -16,7 +16,8 @@ print("percentage {}".format(df_train['SeriousDlqin2yrs'].sum()/len(df_train)))
 
 # Check - missing data
 null_num = df_train.isnull().sum()
-pd.DataFrame({'Column': null_num.index, 'Value':null_num.values, '%':null_num.values/len(df_train)})
+pd.DataFrame({'Column': null_num.index, 'Value':null_num.values, \
+    '%':null_num.values/len(df_train)})
 
 df_train['RevolvingUtilizationOfUnsecuredLines'].describe()
 sns.distplot(df_train['RevolvingUtilizationOfUnsecuredLines'])
@@ -39,7 +40,8 @@ df_train['bin_age'].value_counts()
 
 # Bin - NumberOfDependents [-math.inf,2,4,6,8,10,math.inf]
 dependent_bin =[-math.inf,2,4,6,8,10,math.inf]
-df_train['bin_NumberOfDependents'] = pd.cut(df_train['NumberOfDependents'], bins=dependent_bin)
+df_train['bin_NumberOfDependents'] = \
+    pd.cut(df_train['NumberOfDependents'], bins=dependent_bin)
 df_train[['NumberOfDependents', 'bin_NumberOfDependents']]
 df_train['bin_NumberOfDependents'].value_counts()
 
@@ -49,9 +51,12 @@ df_train['bin_NumberOfDependents'].value_counts()
 # NumberOfTimes90DaysLate
 # [-math.inf,1,2,3,4,5,6,7,8,9,math.inf]
 dpd_bins = [-math.inf,1,2,3,4,5,6,7,8,9,math.inf]
-df_train['bin_NumberOfTime30-59DaysPastDueNotWorse'] = pd.cut(df_train['NumberOfTime30-59DaysPastDueNotWorse'], bins=dpd_bins)
-df_train['bin_NumberOfTime60-89DaysPastDueNotWorse'] = pd.cut(df_train['NumberOfTime60-89DaysPastDueNotWorse'], bins=dpd_bins)
-df_train['bin_NumberOfTimes90DaysLate'] = pd.cut(df_train['NumberOfTimes90DaysLate'], bins=dpd_bins)
+df_train['bin_NumberOfTime30-59DaysPastDueNotWorse'] = \
+    pd.cut(df_train['NumberOfTime30-59DaysPastDueNotWorse'], bins=dpd_bins)
+df_train['bin_NumberOfTime60-89DaysPastDueNotWorse'] = \
+    pd.cut(df_train['NumberOfTime60-89DaysPastDueNotWorse'], bins=dpd_bins)
+df_train['bin_NumberOfTimes90DaysLate'] = \
+    pd.cut(df_train['NumberOfTimes90DaysLate'], bins=dpd_bins)
 df_train['bin_NumberOfTime30-59DaysPastDueNotWorse'].value_counts()
 df_train['bin_NumberOfTime60-89DaysPastDueNotWorse'].value_counts()
 df_train['bin_NumberOfTimes90DaysLate'].value_counts()
@@ -73,3 +78,7 @@ df_train[['bin_RevolvingUtilizationOfUnsecuredLines', \
     'bin_NumberOfOpenCreditLinesAndLoans', 'NumberRealEstateLoansOrLines']]
 df_train['bin_NumberRealEstateLoansOrLines'].value_counts()
 df_train['NumberRealEstateLoansOrLines'].value_counts()
+
+# Show - all bin columns
+bin_cols = [c for c in df_train.columns.values if c.startswith('bin')]
+bin_cols
