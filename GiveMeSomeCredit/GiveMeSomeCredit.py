@@ -35,3 +35,11 @@ df_train['age'].value_counts()
 df_train['bin_age'] = pd.cut(df_train['age'], bins=age_bins)
 df_train['bin_age'].value_counts()
 df_train[['age', 'bin_age']]
+df_train['bin_age'].value_counts()
+
+# Bin - NumberOfDependents [-math.inf,2,4,6,8,10,math.inf]
+dependent_bin =[-math.inf,2,4,6,8,10,math.inf]
+df_train['bin_NumberOfDependents'] = pd.cut(df_train['NumberOfDependents'], bins=dependent_bin)
+df_train[['NumberOfDependents', 'bin_NumberOfDependents']]
+df_train['bin_NumberOfDependents'].value_counts()
+
