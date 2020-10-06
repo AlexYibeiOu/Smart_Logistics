@@ -43,3 +43,13 @@ df_train['bin_NumberOfDependents'] = pd.cut(df_train['NumberOfDependents'], bins
 df_train[['NumberOfDependents', 'bin_NumberOfDependents']]
 df_train['bin_NumberOfDependents'].value_counts()
 
+# 对于3种逾期次数，即NumberOfTime30-59DaysPastDueNotWorse，NumberOfTime60-89DaysPastDueNotWorse，NumberOfTimes90DaysLate，分成10段
+# [-math.inf,1,2,3,4,5,6,7,8,9,math.inf]
+# Bin - 
+dpd_bins = [-math.inf,1,2,3,4,5,6,7,8,9,math.inf]
+df_train['bin_NumberOfTime30-59DaysPastDueNotWorse'] = pd.cut(df_train['NumberOfTime30-59DaysPastDueNotWorse'], bins=dpd_bins)
+df_train['bin_NumberOfTime60-89DaysPastDueNotWorse'] = pd.cut(df_train['NumberOfTime60-89DaysPastDueNotWorse'], bins=dpd_bins)
+df_train['bin_NumberOfTimes90DaysLate'] = pd.cut(df_train['NumberOfTimes90DaysLate'], bins=dpd_bins)
+df_train['bin_NumberOfTime30-59DaysPastDueNotWorse'].value_counts()
+df_train['bin_NumberOfTime60-89DaysPastDueNotWorse'].value_counts()
+df_train['bin_NumberOfTimes90DaysLate'].value_counts()
