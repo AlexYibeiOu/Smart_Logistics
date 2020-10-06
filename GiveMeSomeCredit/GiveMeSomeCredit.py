@@ -82,3 +82,15 @@ df_train['NumberRealEstateLoansOrLines'].value_counts()
 # Show - all bin columns
 bin_cols = [c for c in df_train.columns.values if c.startswith('bin')]
 bin_cols
+
+# IV
+def cal_IV(df, feature, target):
+    lst = []
+    for i in range(df[feature].nunique()):   # nunique = number of unique
+        val = list(df[feature].unique())[i] 
+        temp1 = df[df[feature]==val].count()[feature]  # total
+        temp2 = df[(df[feature]==val) & (df[target]==1)].count()[feature] # number of target=1
+        print(feature, val, temp1, temp2)
+        lst.append([feature])
+
+cal_IV(df_train, 'bin_age', 'SeriousDlqin2yrs')
