@@ -83,8 +83,10 @@ df_train['NumberRealEstateLoansOrLines'].value_counts()
 bin_cols = [c for c in df_train.columns.values if c.startswith('bin')]
 bin_cols
 
-# IV
+
 import numpy as np
+
+# IV
 def cal_IV(df, feature, target):
     lst = []
     cols = ['Variable', 'Value', 'All', 'Bad']
@@ -92,7 +94,7 @@ def cal_IV(df, feature, target):
         val = list(df[feature].unique())[i] 
         temp1 = df[df[feature]==val].count()[feature]  # total
         temp2 = df[(df[feature]==val) & (df[target]==1)].count()[feature] # number of target=1
-        print(feature, val, temp1, temp2)
+        #print(feature, val, temp1, temp2)
         lst.append([feature, val, temp1, temp2])
     data = pd.DataFrame(lst, columns=cols)
     data = data[data['Bad'] > 0]
@@ -106,7 +108,10 @@ def cal_IV(df, feature, target):
         ((data['Distribution Bad'] - data['Distribution Good']) * data['WOE']).sum()
 
     data = data.sort_values(by=['Variable', 'Value'],ascending=True)
-    print(data)
+    #print(data)
+    return data['IV'].sum()
 
-cal_IV(df_train, 'bin_age', 'SeriousDlqin2yrs')
+for col in bin_cols:
+    print(col)
+    print(cal_IV(df_train, col, 'SeriousDlqin2yrs'))
 
